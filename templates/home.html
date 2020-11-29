@@ -1,0 +1,36 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="color:blue;margin-top:90px;">{{data}}</h1>
+
+<form class="form-container" action="convert" method="post" onsubmit="" style="margin-top:50px;" >
+    {% csrf_token %}
+    <input id="numberInput" maxlength="6" type="text" name="num" placeholder="Enter a number" oninput="validateName()">
+    <span id="error-hint">Please enter a number</span>
+    <input style="width: 200px;margin-left:50px; " type="submit" disabled class="disabled-button" id="submission-button" maxlength="6" value="Submit">
+</form>
+
+<!--<script src="..\[folder_name]\[file_name].js"></script>-->
+<script>
+var numberInput = document.getElementById("numberInput");
+var errorHint = document.getElementById("error-hint");
+var btn = document.getElementById("submission-button");
+
+function validateName () {
+    if(numberInput.value < 0 || isNaN(numberInput.value) || numberInput.value.length < 1) {
+        numberInput.style.borderColor = "red";
+        errorHint.style.display = "block";
+        btn.disabled = true;
+        btn.className = "disabled-button";
+
+    } else {
+        numberInput.style.borderColor = "black";
+        errorHint.style.display = "none";
+        btn.disabled = false;
+        btn.className = "submit-button";
+    }
+}
+    </script>
+{% endblock %}
